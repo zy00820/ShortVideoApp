@@ -1,0 +1,31 @@
+{
+  "expo": {
+    "name": "ShortVideoApp",
+    "slug": "shortvideoapp",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "userInterfaceStyle": "dark",
+    "newArchEnabled": false,
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.shortvideoapp.app"
+    },
+    "android": {
+      "package": "com.shortvideoapp.app",
+      "permissions": [
+        "CAMERA",
+        "RECORD_AUDIO",
+        "READ_EXTERNAL_STORAGE",
+        "WRITE_EXTERNAL_STORAGE"
+      ]
+    },
+    "web": {},
+    "plugins": [
+      "expo-camera",
+      "expo-media-library"
+    ]
+  }
+}
