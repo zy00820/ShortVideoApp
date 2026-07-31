@@ -23,7 +23,7 @@
       ]
     },
     "web": {
-      "basePath": "/ShortVideoApp/"
+      "basePath": "/"
     },
     "plugins": [
       "expo-camera",
