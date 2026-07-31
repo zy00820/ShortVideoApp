@@ -22,7 +22,9 @@
         "WRITE_EXTERNAL_STORAGE"
       ]
     },
-    "web": {},
+    "web": {
+      "basePath": "/ShortVideoApp/"
+    },
     "plugins": [
       "expo-camera",
       "expo-media-library"
