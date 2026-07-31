@@ -81,7 +81,10 @@ export const ProfileScreen = ({ navigation, user: userProp }) => {
           <View style={styles.actionButtons}>
             {isOwnProfile ? (
               <>
-                <TouchableOpacity style={styles.editButton}>
+                <TouchableOpacity 
+                  style={styles.editButton}
+                  onPress={() => navigation.navigate('EditProfile')}
+                >
                   <Text style={styles.editButtonText}>编辑资料</Text>
                 </TouchableOpacity>
                 <TouchableOpacity style={styles.shareButton}>

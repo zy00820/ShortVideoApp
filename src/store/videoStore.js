@@ -8,6 +8,11 @@ export const useVideoStore = create((set) => ({
   savedVideos: new Set(),
   followedUsers: new Set(),
 
+  updateUser: (updates) =>
+    set((state) => ({
+      currentUser: { ...state.currentUser, ...updates },
+    })),
+
   toggleLike: (videoId) =>
     set((state) => {
       const newLiked = new Set(state.likedVideos);
