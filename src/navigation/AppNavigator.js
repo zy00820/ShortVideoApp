@@ -3,6 +3,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { MainTabs } from './MainTabs';
 import { ProfileScreen } from '../screens/Profile';
+import { SettingsScreen } from '../screens/Settings';
 import { COLORS } from '../constants';
 
 const Stack = createNativeStackNavigator();
@@ -23,6 +24,7 @@ export const AppNavigator = () => {
           component={ProfileScreen}
           options={{ title: '视频详情' }}
         />
+        <Stack.Screen name="Settings" component={SettingsScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );

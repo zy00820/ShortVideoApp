@@ -49,8 +49,8 @@ export const ProfileScreen = ({ navigation, user: userProp }) => {
           <View style={styles.headerButton} />
         )}
         <Text style={styles.headerTitle}>{user.nickname}</Text>
-        <TouchableOpacity style={styles.headerButton}>
-          <Text style={styles.headerIcon}>⋯</Text>
+        <TouchableOpacity style={styles.headerButton} onPress={() => navigation.navigate('Settings')}>
+          <Text style={styles.headerIcon}>⚙️</Text>
         </TouchableOpacity>
       </View>
 
