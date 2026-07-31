@@ -1,0 +1,20 @@
+{
+  "display": "standalone",
+  "lang": "en",
+  "name": "ShortVideoApp",
+  "short_name": "ShortVideoApp",
+  "start_url": "/?utm_source=web_app_manifest",
+  "orientation": "portrait",
+  "related_applications": [
+    {
+      "platform": "itunes",
+      "id": "com.shortvideoapp.app"
+    },
+    {
+      "platform": "play",
+      "url": "http://play.google.com/store/apps/details?id=com.shortvideoapp.app",
+      "id": "com.shortvideoapp.app"
+    }
+  ],
+  "prefer_related_applications": true
+}
