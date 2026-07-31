@@ -2,9 +2,9 @@
 
 一款基于 React Native + Expo 的仿抖音短视频移动应用。
 
-## 🎉 立即下载 APK
+## 🎉 立即下载 APK（优化版）
 
-**👉 [点击下载最新 APK](https://github.com/zy00820/ShortVideoApp/releases/latest/download/ShortVideoApp-v2.apk)**
+**👉 [点击下载最新 APK（206KB）](https://github.com/zy00820/ShortVideoApp/releases/download/apk-v3/ShortVideoApp-Optimized.apk)**
 
 或访问 [GitHub Releases](https://github.com/zy00820/ShortVideoApp/releases) 查看所有版本。
 
