@@ -32,6 +32,10 @@ export const FeedScreen = ({ onNavigateToProfile }) => {
     toggleLike(videoId);
   };
 
+  const handleFollow = (authorId) => {
+    toggleFollow(authorId);
+  };
+
   const handleShare = () => {
     alert('分享功能：可分享至微信、QQ、朋友圈等');
   };
@@ -44,6 +48,7 @@ export const FeedScreen = ({ onNavigateToProfile }) => {
       isSaved={savedVideos.has(item.id)}
       isFollowing={followedUsers.has(item.author.id)}
       onLike={() => handleLike(item.id)}
+      onFollow={() => handleFollow(item.author.id)}
       onComment={() => openComments(item)}
       onShare={handleShare}
       onProfilePress={() => onNavigateToProfile(item.author)}

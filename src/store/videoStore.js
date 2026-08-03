@@ -1,12 +1,16 @@
 import { create } from 'zustand';
 import { mockVideos, currentUser } from '../data/mockData';
 
+const initialFollowedUsers = new Set(
+  mockVideos.filter((v) => v.author.isFollowing).map((v) => v.author.id)
+);
+
 export const useVideoStore = create((set) => ({
   videos: mockVideos,
   currentUser: currentUser,
   likedVideos: new Set(),
   savedVideos: new Set(),
-  followedUsers: new Set(),
+  followedUsers: initialFollowedUsers,
 
   updateUser: (updates) =>
     set((state) => ({
@@ -45,6 +49,9 @@ export const useVideoStore = create((set) => ({
       }
       return { followedUsers: newFollowed };
     }),
+
+  isFollowingUser: (userId) =>
+    (state) => state.followedUsers.has(userId),
 
   addComment: (videoId, comment) =>
     set((state) => ({

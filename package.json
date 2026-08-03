@@ -1,6 +1,6 @@
 {
   "name": "shortvideoapp",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "main": "index.js",
   "scripts": {
     "start": "expo start",
@@ -12,11 +12,11 @@
     "@react-navigation/bottom-tabs": "^6.5.11",
     "@react-navigation/native": "^6.1.9",
     "@react-navigation/native-stack": "^6.9.17",
-    "expo": "~49.0.15",
+    "expo": "^49.0.23",
     "expo-av": "~13.2.1",
     "expo-camera": "~13.6.0",
     "expo-constants": "~14.4.2",
-    "expo-image-picker": "^57.0.7",
+    "expo-image-picker": "^14.7.1",
     "expo-media-library": "~15.9.2",
     "expo-splash-screen": "~0.20.5",
     "expo-status-bar": "~1.6.0",

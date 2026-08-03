@@ -1,5 +1,5 @@
 import React, { useRef, useState } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, Dimensions } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, Dimensions, Animated } from 'react-native';
 import { Video } from 'expo-av';
 import { SIZES, COLORS } from '../constants';
 import { Icon } from './Icon';
@@ -7,11 +7,13 @@ import { Avatar } from './Avatar';
 
 const { width: WINDOW_WIDTH, height: WINDOW_HEIGHT } = Dimensions.get('window');
 
-export const VideoPlayer = ({ video, isActive, onLike, onComment, onShare, onProfilePress, isLiked, isSaved, isFollowing }) => {
+export const VideoPlayer = ({ video, isActive, onLike, onComment, onShare, onProfilePress, onFollow, isLiked, isSaved, isFollowing }) => {
   const videoRef = useRef(null);
   const [isPlaying, setIsPlaying] = useState(true);
   const [showControls, setShowControls] = useState(false);
   const [showHeart, setShowHeart] = useState(false);
+  const [showFollowTip, setShowFollowTip] = useState(false);
+  const followScale = useRef(new Animated.Value(1)).current;
 
   const togglePlay = () => {
     if (isPlaying) {
@@ -30,6 +32,25 @@ export const VideoPlayer = ({ video, isActive, onLike, onComment, onShare, onPro
 
   const toggleControls = () => {
     setShowControls(!showControls);
+  };
+
+  const handleFollow = () => {
+    Animated.sequence([
+      Animated.spring(followScale, {
+        toValue: 1.3,
+        useNativeDriver: true,
+        speed: 40,
+        bounciness: 4,
+      }),
+      Animated.spring(followScale, {
+        toValue: 1,
+        useNativeDriver: true,
+      }),
+    ]).start();
+
+    setShowFollowTip(true);
+    setTimeout(() => setShowFollowTip(false), 1500);
+    onFollow?.();
   };
 
   const formatCount = (n) => {
@@ -65,6 +86,12 @@ export const VideoPlayer = ({ video, isActive, onLike, onComment, onShare, onPro
         </View>
       )}
 
+      {showFollowTip && (
+        <View style={styles.followTip}>
+          <Text style={styles.followTipText}>{isFollowing ? '已关注' : '关注成功'}</Text>
+        </View>
+      )}
+
       {showControls && (
         <View style={styles.playButtonOverlay}>
           <TouchableOpacity onPress={togglePlay}>
@@ -94,12 +121,20 @@ export const VideoPlayer = ({ video, isActive, onLike, onComment, onShare, onPro
         </View>
 
         <View style={styles.sideActions}>
-          <TouchableOpacity onPress={onProfilePress} style={styles.avatarContainer}>
-            <Avatar uri={video.author.avatar} size={48} />
-            <View style={styles.followButton}>
-              <Text style={styles.followText}>{isFollowing ? '✓' : '+'}</Text>
-            </View>
-          </TouchableOpacity>
+          <View style={styles.avatarContainer}>
+            <TouchableOpacity onPress={onProfilePress}>
+              <Avatar uri={video.author.avatar} size={48} />
+            </TouchableOpacity>
+            <Animated.View style={{ transform: [{ scale: followScale }] }}>
+              <TouchableOpacity
+                onPress={handleFollow}
+                style={[styles.followButton, isFollowing && styles.followButtonActive]}
+                hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
+              >
+                <Text style={styles.followText}>{isFollowing ? '✓' : '+'}</Text>
+              </TouchableOpacity>
+            </Animated.View>
+          </View>
 
           <TouchableOpacity onPress={onLike} style={styles.actionButton}>
             <Text style={styles.actionIcon}>{isLiked ? '❤️' : '🤍'}</Text>
@@ -153,6 +188,22 @@ const styles = StyleSheet.create({
     textShadowColor: 'rgba(0,0,0,0.5)',
     textShadowOffset: { width: 0, height: 2 },
     textShadowRadius: 4,
+  },
+  followTip: {
+    position: 'absolute',
+    top: '45%',
+    left: '50%',
+    transform: [{ translateX: -50 }],
+    backgroundColor: 'rgba(0,0,0,0.7)',
+    paddingHorizontal: 20,
+    paddingVertical: 10,
+    borderRadius: 20,
+    zIndex: 100,
+  },
+  followTipText: {
+    color: COLORS.white,
+    fontSize: SIZES.body,
+    fontWeight: '600',
   },
   playButtonOverlay: {
     ...StyleSheet.absoluteFillObject,
@@ -246,6 +297,9 @@ const styles = StyleSheet.create({
     height: 20,
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  followButtonActive: {
+    backgroundColor: COLORS.gray[500],
   },
   followText: {
     color: COLORS.white,
